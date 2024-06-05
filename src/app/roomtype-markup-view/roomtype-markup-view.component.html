@@ -1,0 +1,8 @@
+<mat-card class="card">
+    <mat-card-title class="mat-card-title">MarkUp Value: {{ markupValue }} %</mat-card-title>
+    <mat-card-subtitle class="mat-card-subtitle"> Available Room Types </mat-card-subtitle>
+
+    <ul class="list-items">
+        <li *ngFor="let roomType of roomTypes"> {{roomType}} </li>
+    </ul>
+</mat-card>

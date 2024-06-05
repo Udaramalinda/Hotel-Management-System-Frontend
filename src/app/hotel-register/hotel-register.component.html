@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Hotel Registration</h2>
+    <form [formGroup]="hotelRegisterForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="hotelName">Hotel Name</label>
+        <input type="text" id="hotelName" class="form-control" formControlName="hotelName" required>
+        <div *ngIf="hotelRegisterForm.controls['hotelName'].invalid && (hotelRegisterForm.controls['hotelName'].dirty || hotelRegisterForm.controls['hotelName'].touched)" class="alert alert-danger">
+          <div *ngIf="hotelRegisterForm.controls['hotelName'].errors?.['required']">Hotel Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input id="address" class="form-control" formControlName="address" rows="3" required>
+        <div *ngIf="hotelRegisterForm.controls['address'].invalid && (hotelRegisterForm.controls['address'].dirty || hotelRegisterForm.controls['address'].touched)" class="alert alert-danger">
+          <div *ngIf="hotelRegisterForm.controls['address'].errors?.['required']">Address is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" required>
+        <div *ngIf="hotelRegisterForm.controls['email'].invalid && (hotelRegisterForm.controls['email'].dirty || hotelRegisterForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="hotelRegisterForm.controls['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="hotelRegisterForm.controls['email'].errors?.['email']">Invalid email format.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Telephone</label>
+        <input type="tel" id="telephone" class="form-control" formControlName="telephone" required>
+        <div *ngIf="hotelRegisterForm.controls['telephone'].invalid && (hotelRegisterForm.controls['telephone'].dirty || hotelRegisterForm.controls['telephone'].touched)" class="alert alert-danger">
+          <div *ngIf="hotelRegisterForm.controls['telephone'].errors?.['required']">Telephone is required.</div>
+          <div *ngIf="hotelRegisterForm.controls['telephone'].errors?.['pattern']">Invalid telephone number. Please enter 10 digits.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="hotelRegisterForm.invalid">Register Hotel</button>
+    </form>
+  </div>
+  

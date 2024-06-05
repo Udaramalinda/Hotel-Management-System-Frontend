@@ -1,0 +1,53 @@
+<div class="container">
+    <form [formGroup]="contractGetForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="hotelName">Select Hotel</label>
+          <select id="hotelName" class="form-control" formControlName="hotelName" required (click)="getHotel()">
+            <option value="" disabled>Select a Hotel</option>
+            <option *ngFor="let hotel of hotels" [value]="hotel">{{ hotel }}</option>
+          </select>
+          <div *ngIf="contractGetForm.controls['hotelName'].invalid && (contractGetForm.controls['hotelName'].dirty || contractGetForm.controls['hotelName'].touched)" class="alert alert-danger">
+            <div *ngIf="contractGetForm.controls['hotelName'].errors?.['required']">Please select a hotel.</div>
+          </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="contractGetForm.invalid">Register Contract</button>
+    </form>
+</div>
+
+<div *ngFor="let contract of contracts">
+  <mat-card class="card">
+    <mat-card-title>{{ contract.hotelName }}</mat-card-title>
+    <mat-card-subtitle>Valid From {{ contract.startDate }} - Valid To {{ contract.endDate }}</mat-card-subtitle>
+    <mat-card-content>
+      <table mat-table [dataSource]="contract.contractRoomList" class="mat-elevation-z8">
+        <!-- Room Type Column -->
+        <ng-container matColumnDef="roomType">
+          <th mat-header-cell *matHeaderCellDef> Room Type </th>
+          <td mat-cell *matCellDef="let room"> {{ room.roomType }} </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let room"> {{ room.price }} </td>
+        </ng-container>
+
+        <!-- Number of Rooms Column -->
+        <ng-container matColumnDef="numberOfRooms">
+          <th mat-header-cell *matHeaderCellDef> No of Rooms </th>
+          <td mat-cell *matCellDef="let room"> {{ room.numberOfRooms }} </td>
+        </ng-container>
+
+        <!-- Max Adults Column -->
+        <ng-container matColumnDef="maxAdults">
+          <th mat-header-cell *matHeaderCellDef> Max Adults </th>
+          <td mat-cell *matCellDef="let room"> {{ room.maxAdults }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['roomType', 'price', 'numberOfRooms', 'maxAdults']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['roomType', 'price', 'numberOfRooms', 'maxAdults'];"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

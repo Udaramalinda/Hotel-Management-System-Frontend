@@ -1,0 +1,23 @@
+.card {
+    margin: 30px;
+    padding: 20px;
+    background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: black;
+    border-width: 2px;
+}
+
+.mat-card-title {
+    font-size: 30px;
+}
+
+.mat-card-subtitle {
+    color: black;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.list-item {
+    font-size: 15px;
+}

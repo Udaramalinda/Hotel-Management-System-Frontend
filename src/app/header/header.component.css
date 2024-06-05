@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic {
+    padding-top: 15px;
+    margin-left: 15px;
+}
+
+
+button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+button:hover {
+    background-color: #27ae60;
+}

@@ -1,0 +1,35 @@
+<!-- register-form.component.html -->
+<div class="container">
+    <h2>Agent Registration</h2>
+    <form [formGroup]="agentRegisterForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" required>
+        <div *ngIf="agentRegisterForm.controls['email'].invalid && (agentRegisterForm.controls['email'].dirty || agentRegisterForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="agentRegisterForm.controls['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="agentRegisterForm.controls['email'].errors?.['email']">Invalid email format.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" required>
+        <div *ngIf="agentRegisterForm.controls['name'].invalid && (agentRegisterForm.controls['name'].dirty || agentRegisterForm.controls['name'].touched)" class="alert alert-danger">
+          <div *ngIf="agentRegisterForm.controls['name'].errors?.['required']">Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password" required>
+        <div *ngIf="agentRegisterForm.controls['password'].invalid && (agentRegisterForm.controls['password'].dirty || agentRegisterForm.controls['password'].touched)" class="alert alert-danger">
+          <div *ngIf="agentRegisterForm.controls['password'].errors?.['required']">Password is required.</div>
+          <div *ngIf="agentRegisterForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</div>
+        </div>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="isAdmin" class="form-check-input" formControlName="isAdmin">
+        <label for="isAdmin" class="form-check-label">IsAdmin</label>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="agentRegisterForm.invalid">Register</button>
+    </form>
+  </div>
+  

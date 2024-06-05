@@ -1,0 +1,89 @@
+<!-- search-rooms.component.html -->
+<div class="container">
+    <h2>Search Rooms</h2>
+    <form [formGroup]="searchRoomsForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="checkInDate">Check-in Date</label>
+        <input type="date" id="checkInDate" class="form-control" formControlName="checkInDate" required>
+        <div *ngIf="checkInDate?.invalid && (checkInDate?.dirty || checkInDate?.touched)" class="alert alert-danger">
+          <div *ngIf="checkInDate?.errors?.['required']">Check-in date is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="numberOfNights">Number of Nights</label>
+        <input type="number" id="numberOfNights" class="form-control" formControlName="numberOfNights" required>
+        <div *ngIf="numberOfNights?.invalid && (numberOfNights?.dirty || numberOfNights?.touched)" class="alert alert-danger">
+          <div *ngIf="numberOfNights?.errors?.['required']">Number of nights is required.</div>
+          <div *ngIf="numberOfNights?.errors?.['min']">Number of nights must be greater than or equal to 0.</div>
+          <div *ngIf="numberOfNights?.errors?.['max']">Number of nights must be less than or equal to 100.</div>
+        </div>
+      </div>
+      <div formArrayName="guests">
+        <div *ngFor="let guest of guests; let i = index" [formGroupName]="i">
+          <div class="form-group">
+            <label for="adults">Number of Adults</label>
+            <input type="number" id="adults" class="form-control" formControlName="adults" required>
+            <div *ngIf="guest.get('adults')?.invalid && (guest.get('adults')?.dirty || guest.get('adults')?.touched)" class="alert alert-danger">
+              <div *ngIf="guest.get('adults')?.errors?.['required']">Number of adults is required.</div>
+              <div *ngIf="guest.get('adults')?.errors?.['min']">Number of adults must be greater than or equal to 0.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rooms">Number of Rooms</label>
+            <input type="number" id="rooms" class="form-control" formControlName="rooms" required>
+            <div *ngIf="guest.get('rooms')?.invalid && (guest.get('rooms')?.dirty || guest.get('rooms')?.touched)" class="alert alert-danger">
+              <div *ngIf="guest.get('rooms')?.errors?.['required']">Number of rooms is required.</div>
+              <div *ngIf="guest.get('rooms')?.errors?.['min']">Number of rooms must be greater than or equal to 0.</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="removeGuestField(i)">Remove Guest</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-third" (click)="addGuestField()">Add Guest</button>
+      <button type="submit" class="btn btn-primary" [disabled]="searchRoomsForm.invalid">Search Rooms</button>
+    </form>
+  </div>
+
+  <div *ngFor="let result of results">
+    <mat-card class="card">
+      <mat-card-title>{{ result.hotelName }}</mat-card-title>
+      <mat-card-subtitle>Total Price: {{ result.finalPrice }}</mat-card-subtitle>
+      <mat-card-content>
+        <table mat-table [dataSource]="result.rooms" class="mat-elevation-z8">
+          <!-- Room Type Column -->
+          <ng-container matColumnDef="roomType">
+            <th mat-header-cell *matHeaderCellDef> Room Type </th>
+            <td mat-cell *matCellDef="let room"> {{ room.roomType }} </td>
+          </ng-container>
+  
+          <!-- Price Column -->
+          <ng-container matColumnDef="numberOfRooms">
+            <th mat-header-cell *matHeaderCellDef> No Of Rooms </th>
+            <td mat-cell *matCellDef="let room"> {{ room.numberOfRooms }} </td>
+          </ng-container>
+  
+          <!-- Number of Rooms Column -->
+          <ng-container matColumnDef="visitAdults">
+            <th mat-header-cell *matHeaderCellDef> Visited Adults </th>
+            <td mat-cell *matCellDef="let room"> {{ room.visitAdults }} </td>
+          </ng-container>
+  
+          <!-- Max Adults Column -->
+          <ng-container matColumnDef="maxAdults">
+            <th mat-header-cell *matHeaderCellDef> Max Adults </th>
+            <td mat-cell *matCellDef="let room"> {{ room.maxAdults }} </td>
+          </ng-container>
+
+          <!-- Max Adults Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let room"> {{ room.price }} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="['roomType', 'numberOfRooms', 'visitAdults', 'maxAdults', 'price']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['roomType', 'numberOfRooms', 'visitAdults', 'maxAdults', 'price'];"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

@@ -1,0 +1,15 @@
+<!-- room-type-register.component.html -->
+<div class="container">
+    <h2>Room Type Registration</h2>
+    <form [formGroup]="roomTypeRegisterForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="roomTypeName">Room Type</label>
+        <input type="text" id="roomTypeName" class="form-control" formControlName="roomTypeName" required>
+        <div *ngIf="roomTypeRegisterForm.controls['roomTypeName'].invalid && (roomTypeRegisterForm.controls['roomTypeName'].dirty || roomTypeRegisterForm.controls['roomTypeName'].touched)" class="alert alert-danger">
+          <div *ngIf="roomTypeRegisterForm.controls['roomTypeName'].errors?.['required']">Room Type is required.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="roomTypeRegisterForm.invalid">Register Room Type</button>
+    </form>
+  </div>
+  

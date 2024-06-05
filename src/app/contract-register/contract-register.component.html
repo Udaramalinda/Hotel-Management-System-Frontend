@@ -1,0 +1,72 @@
+<!-- contract-register.component.html -->
+<div class="container">
+  <h2>Contract Registration</h2>
+  <form [formGroup]="contractRegisterForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="hotelName">Select Hotel</label>
+      <select id="hotelName" class="form-control" formControlName="hotelName" required (click)="getHotel()">
+        <option value="" disabled>Select a Hotel</option>
+        <option *ngFor="let hotel of hotels" [value]="hotel">{{ hotel }}</option>
+      </select>
+      <div *ngIf="contractRegisterForm.controls['hotelName'].invalid && (contractRegisterForm.controls['hotelName'].dirty || contractRegisterForm.controls['hotelName'].touched)" class="alert alert-danger">
+        <div *ngIf="contractRegisterForm.controls['hotelName'].errors?.['required']">Please select a hotel.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Contract Starting Date</label>
+      <input type="date" id="startDate" class="form-control" formControlName="startDate" required>
+      <div *ngIf="contractRegisterForm.controls['startDate'].invalid && (contractRegisterForm.controls['startDate'].dirty || contractRegisterForm.controls['startDate'].touched)" class="alert alert-danger">
+        <div *ngIf="contractRegisterForm.controls['startDate'].errors?.['required']">Contract starting date is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="endDate">Contract Ending Date</label>
+      <input type="date" id="endDate" class="form-control" formControlName="endDate" required>
+      <div *ngIf="contractRegisterForm.controls['endDate'].invalid && (contractRegisterForm.controls['endDate'].dirty || contractRegisterForm.controls['endDate'].touched)" class="alert alert-danger">
+        <div *ngIf="contractRegisterForm.controls['endDate'].errors?.['required']">Contract ending date is required.</div>
+        <div *ngIf="contractRegisterForm.controls['endDate'].errors?.['invalidEndDate']">Contract ending date must come after the starting date.</div>
+      </div>
+    </div>
+
+    <!-- Room Details Section -->
+    <div formArrayName="roomDetails">
+      <div *ngFor="let roomDetail of roomDetails; let i = index" [formGroupName]="i">
+        <div class="form-group">
+          <label for="roomTypeName">Room Type</label>
+          <select id="roomTypeName" class="form-control" formControlName="roomTypeName" required (click)="getRoomType()">
+            <option value="" disabled>Select a Room Type</option>
+            <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
+          </select>
+          <div *ngIf="roomDetail.get('type')?.invalid && (roomDetail.get('type')?.dirty || roomDetail.get('type')?.touched)" class="alert alert-danger">
+            <div *ngIf="roomDetail.get('type')?.errors?.['required']">Please select a room type.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price (in dollars)</label>
+          <input type="number" id="price" class="form-control" formControlName="price" required>
+          <div *ngIf="roomDetail.get('price')?.invalid && (roomDetail.get('price')?.dirty || roomDetail.get('price')?.touched)" class="alert alert-danger">
+            <div *ngIf="roomDetail.get('price')?.errors?.['required']">Price is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="numOfRooms">Number of Rooms</label>
+          <input type="number" id="numOfRooms" class="form-control" formControlName="numOfRooms" required>
+          <div *ngIf="roomDetail.get('numOfRooms')?.invalid && (roomDetail.get('numOfRooms')?.dirty || roomDetail.get('numOfRooms')?.touched)" class="alert alert-danger">
+            <div *ngIf="roomDetail.get('numOfRooms')?.errors?.['required']">Number of rooms is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="maxAdults">Max Adults</label>
+          <input type="number" id="maxAdults" class="form-control" formControlName="maxAdults" required>
+          <div *ngIf="roomDetail.get('maxAdults')?.invalid && (roomDetail.get('maxAdults')?.dirty || roomDetail.get('maxAdults')?.touched)" class="alert alert-danger">
+            <div *ngIf="roomDetail.get('maxAdults')?.errors?.['required']">Max adults is required.</div>
+          </div>
+        </div>
+        
+          <button type="button" class="btn btn-danger" (click)="removeRoomType(i)">Remove Room Type</button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success" (click)="addRoomType()">Add Room Type</button>
+    <button type="submit" class="btn btn-primary" [disabled]="contractRegisterForm.invalid">Register Contract</button>
+  </form>
+</div>

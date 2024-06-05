@@ -1,0 +1,11 @@
+div {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the header container */
+.header {
+  background: linear-gradient(to right, #2d084b, #4c0277); 
+  color: #fff; 
+}

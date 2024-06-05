@@ -1,0 +1,10 @@
+.hotel-table{
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    border: 2px;
+    border: black;
+    border-style: solid;
+    border-radius: 10px;
+}

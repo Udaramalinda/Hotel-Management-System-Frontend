@@ -1,0 +1,17 @@
+<!-- markup-register.component.html -->
+<div class="container">
+    <h2>Markup Registration</h2>
+    <form [formGroup]="markupRegisterForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="markupPercentage">Markup Percentage</label>
+        <input type="number" id="markupPercentage" class="form-control" formControlName="markupPercentage" required>
+        <div *ngIf="markupRegisterForm.controls['markupPercentage'].invalid && (markupRegisterForm.controls['markupPercentage'].dirty || markupRegisterForm.controls['markupPercentage'].touched)" class="alert alert-danger">
+          <div *ngIf="markupRegisterForm.controls['markupPercentage'].errors?.['required']">Markup Percentage is required.</div>
+          <div *ngIf="markupRegisterForm.controls['markupPercentage'].errors?.['min']">Markup Percentage must be at least 0.</div>
+          <div *ngIf="markupRegisterForm.controls['markupPercentage'].errors?.['max']">Markup Percentage cannot exceed 100.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="markupRegisterForm.invalid">Register Markup</button>
+    </form>
+  </div>
+  
