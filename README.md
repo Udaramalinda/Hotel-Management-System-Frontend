@@ -1,27 +1,33 @@
-# SunTravelsFrontend
+# Hotel Reservation and Management System Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.5.
+This repository contains the **frontend** for the Hotel Reservation and Management System, developed using **Angular** and **Jest** for testing. The frontend provides a user-friendly interface for managing hotel reservations, room registrations, and personalized recommendations.
 
-## Development server
+[Backend Repository for Hotel Reservation & Management System](https://github.com/Udaramalinda/Hotel-Management-System-Backend)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![](https://github.com/Udaramalinda/Hotel-Management-System-Frontend/blob/main/Screenshot%202024-05-31%20010903.png)
 
-## Code scaffolding
+![](https://github.com/Udaramalinda/Hotel-Management-System-Frontend/blob/main/Screenshot%202024-05-31%20011135.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![](https://github.com/Udaramalinda/Hotel-Management-System-Frontend/blob/main/Screenshot%202024-05-31%20011315.png)
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features
 
-## Running unit tests
+- **Responsive Design**: A fully responsive UI for seamless use on any device.
+- **User Authentication**: JWT-based login and registration.
+- **Role-Based Access Control (RBAC)**: Interface tailored for Admins, Managers, and Customers:
+  - **Admin**: Access to hotel and user management.
+  - **Manager**: Manage hotel details and room reservations.
+  - **Customer**: Search hotels, book rooms, and view personalized recommendations.
+- **Search and Filter**: Find hotels and rooms by budget, size, and availability.
+- **Interactive Dashboard**: Visualized data for bookings, room availability, and customer activity.
+- **Unit and Integration Testing**: Ensures functionality and reliability using **Jest**.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Tech Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Framework**: Angular
+- **State Management**: RxJS
+- **Testing**: Jest
